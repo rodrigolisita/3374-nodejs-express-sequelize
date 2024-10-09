@@ -9,7 +9,7 @@ class Controller {
             return res.status(200).json(listaDeRegistros);
 
         }catch(erro){
-            // erro
+            return res.status(500).json({erro: erro.message});
         }
     }
 
@@ -20,7 +20,7 @@ class Controller {
             return res.status(200).json(umRegistro);
 
         }catch(erro){
-            return res.status(500).json({ error: 'Failed to retrieve record' }); // For a general error
+            return res.status(500).json({erro: erro.message});            
         }
     }
 
@@ -31,21 +31,9 @@ class Controller {
             return res.status(200).json(novoRegistroCriado);
 
         }catch(erro){
-
+            return res.status(500).json({erro: erro.message});
         }
     }
-
-    // async pegaMatriculasEstudante(req,res){
-        // const {id} = req.params;
-        // try{
-            // const listaDeMatriculasDoEstudante = await this.entidadeService.pegaTodosOsCursosDoAluno(Number(id)); 
-            // return res.status(200).json(listaDeMatriculasDoEstudante);                        
-        // }catch(erro){
-// 
-        // }
-    // }
-
-    
 
     async atualiza(req, res){
         const { id } = req.params;
@@ -58,7 +46,7 @@ class Controller {
             return res.status(200).json({mensagem: `Atualizado com sucesso`});
 
         }catch(erro){
-            // erro
+            return res.status(500).json({erro: erro.message});
         }
     }
 
@@ -68,8 +56,8 @@ class Controller {
             await this.entidadeService.excluiRegistro(Number(id));
             return res.status(200).json({mensagem: `id ${id} deletado`});
 
-        }catch(error){
-            return res.status(500).json(error.message);
+        }catch(erro){
+            return res.status(500).json({erro: erro.message});
         }
     }
 }
